@@ -234,7 +234,7 @@ function MonthToString($month){
 				<ul class="page-breadcrumb">
 					<li>
 						<i class="fa fa-home"></i>
-						<a href="index.html">Home</a>
+						<a href="<?=base_url();?>dashboard_c">Home</a>
 						<i class="fa fa-angle-right"></i>
 					</li>
 					<li>
