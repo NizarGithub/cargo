@@ -23,7 +23,7 @@ class Barang_c extends CI_Controller {
 			'sub_menu' 	      => 'Master Data',
 			'sub_menu1'	      => 'Master Barang',
 			'menu' 	   	      => 'master_data',
-			'menu2'		      => 'Master Barang',
+			'menu2'		      => 'barang',
 			'lihat_data'      => $this->barang->lihat_data_barang(),
 			'lihat_satuan'    => $this->barang->lihat_data_satuan(),
 			'url_simpan' 	  => base_url().'barang_c/simpan',

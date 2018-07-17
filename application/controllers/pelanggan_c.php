@@ -22,7 +22,7 @@ class Pelanggan_c extends CI_Controller {
 				'sub_menu' 	 => 'master data',
 				'sub_menu1'	 => 'master pelanggan',
 				'menu' 	   	 => 'master_data',
-				'menu2'		 => 'master pelanggan',
+				'menu2'		 => 'pelanggan',
 				'lihat_data' => $this->pelanggan->lihat_data_pelanggan(),
 				'url_simpan' => base_url().'pelanggan_c/simpan',
 				'url_hapus'  => base_url().'pelanggan_c/hapus',

@@ -154,7 +154,7 @@ function MonthToString($month){
 												<i class="fa fa-caret-right"></i> Master Jasa </a>
 											</li>
 											<li <?php if ($menu2 == 'tujuan') { echo "class = 'active'";}?>>
-												<a href="<?php echo base_url(); ?>barang_c">
+												<a href="<?php echo base_url(); ?>tujuan_c">
 												<i class="fa fa-caret-right"></i> Master Tujuan </a>
 											</li>
 										</ul>

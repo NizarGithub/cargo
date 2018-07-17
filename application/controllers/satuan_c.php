@@ -22,7 +22,7 @@ class Satuan_c extends CI_Controller {
 				'sub_menu' 	 => 'master data',
 				'sub_menu1'	 => 'master satuan',
 				'menu' 	   	 => 'master_data',
-				'menu2'		 => 'master satuan',
+				'menu2'		 => 'satuan',
 				'lihat_data'   => $this->satuan->lihat_data_satuan(),
 				'satuan_utama' => $this->satuan->lihat_data_satuan_utama(),
 				'url_simpan' => base_url().'satuan_c/simpan',
