@@ -139,19 +139,23 @@ function MonthToString($month){
 										<ul class="mega-menu-submenu">
 											<li <?php if ($menu2 == 'satuan') { echo "class = 'active'";}?>>
 												<a href="<?php echo base_url(); ?>satuan_c">
-												<i class="fa fa-th-list"></i> Master Satuan </a>
+												<i class="fa fa-caret-right"></i> Master Satuan </a>
 											</li>
 											<li <?php if ($menu2 == 'pelanggan') { echo "class = 'active'";}?>>
 												<a href="<?php echo base_url(); ?>pelanggan_c">
-												<i class="fa fa-user"></i> Master Pelanggan </a>
+												<i class="fa fa-caret-right"></i> Master Pelanggan </a>
 											</li>
 											<li <?php if ($menu2 == 'barang') { echo "class = 'active'";}?>>
 												<a href="<?php echo base_url(); ?>barang_c">
-												<i class="fa fa-hdd-o"></i> Master Barang </a>
+												<i class="fa fa-caret-right"></i> Master Barang </a>
+											</li>
+											<li <?php if ($menu2 == 'jasa') { echo "class = 'active'";}?>>
+												<a href="<?php echo base_url(); ?>jasa_c">
+												<i class="fa fa-caret-right"></i> Master Jasa </a>
 											</li>
 											<li <?php if ($menu2 == 'tujuan') { echo "class = 'active'";}?>>
 												<a href="<?php echo base_url(); ?>barang_c">
-												<i class="fa fa-truck"></i> Master Tujuan </a>
+												<i class="fa fa-caret-right"></i> Master Tujuan </a>
 											</li>
 										</ul>
 									</div>
