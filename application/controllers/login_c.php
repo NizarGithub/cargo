@@ -30,11 +30,11 @@ class Login_c extends CI_Controller {
 			$dt = $data->row();
 
 			$session = array(
-					   'id'		   => $dt->id,
-					   'nama_user' => $dt->nama_user,
-					   'departemen' => $dt->departemen,
-					   'level' => $dt->level,
-					   'foto' 	   => $dt->foto,
+			   'id'		   => $dt->id,
+			   'nama_user' => $dt->nama_user,
+			   'departemen' => $dt->departemen,
+			   'level' => $dt->level,
+			   'foto' 	   => $dt->foto,
 			);
 
 			$this->session->set_userdata('sign_in',$session);

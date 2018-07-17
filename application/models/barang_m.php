@@ -7,45 +7,25 @@ class Barang_m extends CI_Model
 		  $this->load->database();
 	}
 
-	function simpan_data_barang($kode_barang,$nama_barang,$id_satuan,$nama_satuan,$harga_jual,$harga_beli,$id_supplier,$nama_supplier,								  		$id_kategori,$nama_kategori,$src_image)
-	{
-		$sql = "
-			INSERT INTO master_barang (
-				kode_barang,
-				nama_barang,
-				id_satuan,
-				nama_satuan,
-				harga_jual,
-				harga_beli,
-				id_supplier,
-				nama_supplier,
-				id_kategori,
-				nama_kategori,
-				foto,
-				stok
-			) VALUES (
-				'$kode_barang',
-				'$nama_barang',
-				'$id_satuan',
-				'$nama_satuan',
-				'$harga_jual',
-				'$harga_beli',
-				'$id_supplier',
-				'$nama_supplier',
-				'$id_kategori',
-				'$nama_kategori',
-				'$src_image',
-				'0'
-			)";
-		$this->db->query($sql);
-	}
-
 	function lihat_data_barang()
 	{
-		$sql = "
-			SELECT * FROM master_barang ";
+		$sql = "SELECT a.*,b.kode_satuan FROM master_barang a LEFT JOIN master_satuan b ON b.id_satuan = a.id_satuan";
 
 		return $this->db->query($sql)->result();
+	}
+
+	function data_barang_id($id)
+	{
+		$sql = "
+			SELECT 
+				a.*,
+				b.kode_satuan
+			FROM master_barang a
+			LEFT JOIN master_satuan b ON b.id_satuan = a.id_satuan
+			WHERE a.id_barang = '$id' 
+		";
+		$query = $this->db->query($sql);
+		return $query->row();
 	}
 
 	function lihat_data_satuan()
@@ -56,20 +36,32 @@ class Barang_m extends CI_Model
 		return $this->db->query($sql)->result();
 	}
 
-	function lihat_data_supplier()
+	function simpan_data_barang($nama_barang,$jumlah,$id_satuan,$harga_total)
 	{
 		$sql = "
-			SELECT * FROM master_supplier ";
-
-		return $this->db->query($sql)->result();
+			INSERT INTO master_barang (
+				nama_barang,
+				jumlah,
+				id_satuan,
+				harga_total
+			) VALUES (
+				'$nama_barang',
+				'$jumlah',
+				'$id_satuan',
+				'$harga_total'
+			)";
+		$this->db->query($sql);
 	}
 
-	function lihat_data_kategori()
+	function ubah_data_barang($id,$nama_barang,$id_satuan,$harga_total)
 	{
 		$sql = "
-			SELECT * FROM master_kategori_barang ";
-
-		return $this->db->query($sql)->result();
+			UPDATE master_barang SET
+				nama_barang    = '$nama_barang',
+				id_satuan      = '$id_satuan'
+			WHERE id_barang  = '$id'
+		";
+		$this->db->query($sql);
 	}
 
 	function hapus_barang($id)
@@ -78,30 +70,4 @@ class Barang_m extends CI_Model
 		$this->db->query($sql);
 	}
 
-	function data_barang_id($id)
-	{
-		$sql = "SELECT * FROM master_barang WHERE id_barang = '$id' ";
-		$query = $this->db->query($sql);
-		return $query->row();
-	}
-
-	function ubah_data_barang($id,$kode_barang_modal,$nama_barang_modal,$id_satuan_modal,$nama_satuan_modal,$harga_jual_modal,
-							  $harga_beli_modal,$id_supplier_modal,$nama_supplier_modal,$id_kategori_modal,$nama_kategori_modal)
-	{
-		$sql = "
-			UPDATE master_barang SET
-				kode_barang    = '$kode_barang_modal',
-				nama_barang    = '$nama_barang_modal',
-				id_satuan      = '$id_satuan_modal',
-				nama_satuan    = '$nama_satuan_modal',
-				harga_jual     = '$harga_jual_modal',
-				harga_beli     = '$harga_beli_modal',
-				id_supplier    = '$id_supplier_modal',
-				nama_supplier  = '$nama_supplier_modal',
-				id_kategori    = '$id_kategori_modal',
-				nama_kategori  = '$nama_kategori_modal'
-			WHERE id_barang  = '$id'
-		";
-		$this->db->query($sql);
-	}
 }

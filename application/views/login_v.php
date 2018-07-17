@@ -85,7 +85,7 @@ License: You must have a valid license purchased only from themeforest(the above
 
 		<div class="create-account">
 			<p>
-				<a href="javascript:;"  class="uppercase">PEP SYSTEM APPLICATION</a>
+				<a href="javascript:;"  class="uppercase">Aplikasi Kargo</a>
 			</p>
 		</div>
 	</form>

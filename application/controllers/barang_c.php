@@ -18,52 +18,51 @@ class Barang_c extends CI_Controller {
 	public function index()
 	{
 		$data = array(
-				'title' 	      => 'Master Barang',
-				'page'  	      => 'barang_v',
-				'sub_menu' 	      => 'master data',
-				'sub_menu1'	      => 'master barang',
-				'menu' 	   	      => 'master_data',
-				'menu2'		      => 'master barang',
-				'lihat_data'      => $this->barang->lihat_data_barang(),
-				'lihat_satuan'    => $this->barang->lihat_data_satuan(),
-				'lihat_supplier'  => $this->barang->lihat_data_supplier(),
-				'lihat_kategori'  => $this->barang->lihat_data_kategori(),
-				'url_simpan' 	  => base_url().'barang_c/simpan',
-				'url_hapus'  	  => base_url().'barang_c/hapus',
-				'url_ubah'	 	  => base_url().'barang_c/ubah_barang',
-			);
+			'title' 	      => 'Master Barang',
+			'page'  	      => 'barang_v',
+			'sub_menu' 	      => 'Master Data',
+			'sub_menu1'	      => 'Master Barang',
+			'menu' 	   	      => 'master_data',
+			'menu2'		      => 'Master Barang',
+			'lihat_data'      => $this->barang->lihat_data_barang(),
+			'lihat_satuan'    => $this->barang->lihat_data_satuan(),
+			'url_simpan' 	  => base_url().'barang_c/simpan',
+			'url_hapus'  	  => base_url().'barang_c/hapus',
+			'url_ubah'	 	  => base_url().'barang_c/ubah',
+		);
 		
 		$this->load->view('home_v',$data);
 	}
 
 	function simpan()
 	{
-		$kode_barang 	= $this->input->post('kode_barang');
 		$nama_barang 	= $this->input->post('nama_barang');
+		$jumlah 		= '0';
 		$id_satuan   	= $this->input->post('id_satuan');
-		$nama_satuan 	= $this->input->post('nama_satuan');
-		$harga_jual  	= str_replace(',', '', $this->input->post('harga_jual'));
-		$harga_beli  	= str_replace(',', '', $this->input->post('harga_beli'));
-		$id_supplier 	= $this->input->post('id_supplier');
-		$nama_supplier  = $this->input->post('nama_supplier');
-		$id_kategori 	= $this->input->post('id_kategori');
-		$nama_kategori  = $this->input->post('nama_kategori');
+		$harga_total  	= '0';
 
-		  $config['upload_path'] = 'files/';
-	      $config['allowed_types'] = 'gif|jpg|png';
-	      $config['max_size'] = '2048';
-	      // $config['max_width'] = '1024';
-	      // $config['max_height'] = '768';
-	      $this->upload->initialize($config);
+		$this->barang->simpan_data_barang($nama_barang,$jumlah,$id_satuan,$harga_total);
 
-	      if ($this->upload->do_upload('userfiles')) {
-	        $data = array('upload_data' => $this->upload->data());
-	        $src_image = $_FILES['userfiles']['name'];
-	      }else{
-	      	$src_image = 'Kosong';
-	      }
+		$this->session->set_flashdata('sukses','1');
+		redirect('barang_c');
+	}
 
-		$this->barang->simpan_data_barang($kode_barang,$nama_barang,$id_satuan,$nama_satuan,$harga_jual,$harga_beli,$id_supplier,$nama_supplier,								  $id_kategori,$nama_kategori,$src_image);
+	function ubah()
+	{
+		$id 		  = $this->input->post('id_barang_modal');
+		$nama_barang  = $this->input->post('nama_barang_ubah');
+		// $jumlah  	  = str_replace(',', '', $this->input->post('jumlah_ubah'));
+		$id_satuan 	  = '';
+		// $harga_total  = str_replace(',', '', $this->input->post('harga_total_ubah'));
+
+		if($this->input->post('ubah_satuan')){
+			$id_satuan = $this->input->post('pilih_satuan');
+		}else{
+			$id_satuan = $this->input->post('id_satuan_ubah');
+		}
+		
+		$this->barang->ubah_data_barang($id,$nama_barang,$id_satuan);
+		
 		$this->session->set_flashdata('sukses','1');
 		redirect('barang_c');
 	}
@@ -83,26 +82,6 @@ class Barang_c extends CI_Controller {
 		echo json_encode($data);
 	}
 
-	function ubah_barang()
-	{
-		$id 				  = $this->input->post('id_barang_modal');
-		$kode_barang_modal    = $this->input->post('kode_barang_modal');
-		$nama_barang_modal    = $this->input->post('nama_barang_modal');
-		$id_satuan_modal   	  = $this->input->post('id_satuan_modal');
-		$nama_satuan_modal 	  = $this->input->post('nama_satuan_modal');
-		$harga_jual_modal  	  = str_replace(',', '', $this->input->post('harga_jual_modal'));
-		$harga_beli_modal  	  = str_replace(',', '', $this->input->post('harga_beli_modal'));
-		$id_supplier_modal 	  = $this->input->post('id_supplier_modal');
-		$nama_supplier_modal  = $this->input->post('nama_supplier_modal');
-		$id_kategori_modal 	  = $this->input->post('id_kategori_modal');
-		$nama_kategori_modal  = $this->input->post('nama_kategori_modal');
-		
-		$this->barang->ubah_data_barang($id,$kode_barang_modal,$nama_barang_modal,$id_satuan_modal,$nama_satuan_modal,$harga_jual_modal,
-										$harga_beli_modal,$id_supplier_modal,$nama_supplier_modal,$id_kategori_modal,$nama_kategori_modal);
-		$this->session->set_flashdata('sukses','1');
-		redirect('barang_c');	
-		// echo "1";
-	}
 }
 
 /* End of file welcome.php */
