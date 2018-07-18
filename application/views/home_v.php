@@ -155,7 +155,7 @@ function MonthToString($month){
 											</li>
 											<li <?php if ($menu2 == 'tujuan') { echo "class = 'active'";}?>>
 												<a href="<?php echo base_url(); ?>tujuan_c">
-												<i class="fa fa-caret-right"></i> Master Tujuan </a>
+												<i class="fa fa-caret-right"></i> Master Rute </a>
 											</li>
 										</ul>
 									</div>
@@ -191,7 +191,7 @@ function MonthToString($month){
 				<!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
 				<li class="dropdown dropdown-user">
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
-					<img alt="" class="img-circle" src="<?php echo base_url(); ?>assets/admin/layout/img/avatar3_small.jpg"/>
+					<!-- <img alt="" class="img-circle" src="<?php echo base_url(); ?>assets/admin/layout/img/avatar3_small.jpg"/> -->
 					<span class="username username-hide-on-mobile">
 					<?php echo $nama; ?> </span>
 					<i class="fa fa-angle-down"></i>
