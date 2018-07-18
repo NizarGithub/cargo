@@ -114,9 +114,9 @@ float:right;
         <td style="font-size: 14px; width:160px; vertical-align: middle;"><b><?php echo $data->TGL_PENGIRIMAN; ?></b></td>
     </tr>
     <tr>
-        <td style="font-size: 14px; vertical-align: middle;">&nbsp;</td>
-        <td style="font-size: 14px; vertical-align: middle;">&nbsp;</td>
-        <td style="font-size: 14px; width:300px; vertical-align: middle;">&nbsp;</td>
+        <td style="font-size: 14px; vertical-align: middle;">Pelanggan</td>
+        <td style="font-size: 14px; vertical-align: middle;">:</td>
+        <td style="font-size: 14px; width:300px; vertical-align: middle;"><?php echo $data->nama_pelanggan; ?></td>
         <td style="font-size: 14px; width:130px;">&nbsp;</td>
         <td style="font-size: 14px; vertical-align: middle;">Tujuan</td>
         <td style="font-size: 14px; vertical-align: middle;">:</td>

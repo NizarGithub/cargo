@@ -17,8 +17,8 @@ class Dashboard_c extends CI_Controller {
 	{
 		$data = array(
 				'title'    	=> 'Dashboard',
-				'sub_menu' 	=> 'dashboard',
-				'sub_menu1'	=> 'dashboard',
+				'sub_menu' 	=> 'Menu Depan',
+				'sub_menu1'	=> 'Dashboard',
 				'page' 	   	=> 'dashboard_v',
 				'menu' 	   	=> 'dashboard_menu',
 				'menu2'		=> '',
