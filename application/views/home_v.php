@@ -171,12 +171,8 @@ function MonthToString($month){
 					</a>
 					<ul class="dropdown-menu" style="min-width: 400px;">
 						<li <?php if ($menu2 == 'permintaan') { echo "class = 'active'";}?>>
-							<a href="<?php echo base_url(); ?>kartu_stok_c">
+							<a href="<?php echo base_url(); ?>delivery_order">
 							<i class="fa fa-book"></i> Delivery Order </a>
-						</li>
-						<li <?php if ($menu2 == 'permintaan') { echo "class = 'active'";}?>>
-							<a href="<?php echo base_url(); ?>akunting_penerimaan_barang_c">
-							<i class="fa fa-book"></i> Surat Jalan </a>
 						</li>
 					</ul>
 				</li>
