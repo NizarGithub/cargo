@@ -65,29 +65,10 @@ float:right;
 .clear {clear:both;}
 </style>
 
-<table align="left">
-    <tr>
-        <td>
-            <img src="<?=base_url();?>files/cargo/logo-pdamtp.png" style="width:200px; height:70px;">
-        </td>
-        <td>&nbsp;</td>
-        <td>
-            <h4>
-                <b>MY COMPANY</b> <br/>
-                Alamat <br/>
-                Telp.  <br/>
-                website : 
-            </h4>
-        </td>
-    </tr>
-</table>
-
-<br/>
-
 <table align="center">
     <tr>
         <td align="center">
-            <h2><u><?php echo $title; ?></u></h2>
+            <h2><u>SURAT JALAN</u></h2>
         </td>
     </tr>
 </table>
@@ -96,7 +77,7 @@ float:right;
 
 <table align="left" class="tulisan">
     <tr>
-        <td style="font-size: 14px; vertical-align: middle;">Nomor Invoice</td>
+        <td style="font-size: 14px; vertical-align: middle;">No. Surat Jalan</td>
         <td style="font-size: 14px; vertical-align: middle;">:</td>
         <td style="font-size: 14px; width:300px; vertical-align: middle;"><b><?php echo $data->NOMOR_INVOICE; ?></b></td>
         <td style="font-size: 14px; width:130px;">&nbsp;</td>
@@ -105,16 +86,16 @@ float:right;
         <td style="font-size: 14px; width:160px; vertical-align: middle;"><b><?php echo $data->NOMOR_DO; ?></b></td>
     </tr>
     <tr>
-        <td style="font-size: 14px; vertical-align: middle;">Tgl Invoice</td>
+        <td style="font-size: 14px; vertical-align: middle;">Tgl Surat Jalan</td>
         <td style="font-size: 14px; vertical-align: middle;">:</td>
-        <td style="font-size: 14px; width:300px; vertical-align: middle;"><b><?php echo $data->TANGGAL_INVOICE; ?></b></td>
+        <td style="font-size: 14px; width:300px; vertical-align: middle;"><b><?php echo date('d-m-Y'); ?></b></td>
         <td style="font-size: 14px; width:130px;">&nbsp;</td>
         <td style="font-size: 14px; vertical-align: middle;">Tanggal Kirim</td>
         <td style="font-size: 14px; vertical-align: middle;">:</td>
         <td style="font-size: 14px; width:160px; vertical-align: middle;"><b><?php echo $data->TGL_PENGIRIMAN; ?></b></td>
     </tr>
     <tr>
-        <td style="font-size: 14px; vertical-align: middle;">Pelanggan</td>
+        <td style="font-size: 14px; vertical-align: middle;">Penerima</td>
         <td style="font-size: 14px; vertical-align: middle;">:</td>
         <td style="font-size: 14px; width:300px; vertical-align: middle;"><?php echo $data->nama_pelanggan; ?></td>
         <td style="font-size: 14px; width:130px;">&nbsp;</td>
@@ -130,10 +111,11 @@ float:right;
     <thead>
         <tr>
             <th style="width:30px; text-align: center;">NO</th>
+            <th style="width:200px; text-align: center;">KODE BARANG</th>
             <th style="width:300px; text-align: center;">JENIS BARANG</th>
             <th style="width:100px; text-align: center;">BERAT</th>
             <th style="width:100px; text-align: center;">HARGA</th>
-            <th style="width:200px; text-align: center;">JUMLAH</th>
+            <!-- <th style="width:200px; text-align: center;">JUMLAH</th> -->
         </tr>
     </thead>
     <tbody>
@@ -143,6 +125,7 @@ float:right;
                     a.ID,
                     a.ID_DO,
                     a.ID_BARANG,
+                    b.kode_barang,
                     b.nama_barang,
                     a.BERAT,
                     c.kode_satuan,
@@ -163,10 +146,11 @@ float:right;
     ?>
         <tr>
             <td style="text-align: center;"><?php echo $no; ?></td>
-            <td style="text-align: center;"><?php echo $val->nama_barang; ?></td>
+            <td style="text-align: center;"><?php echo $val->kode_barang; ?></td>
+            <td style="text-align: left;"><?php echo $val->nama_barang; ?></td>
             <td style="text-align: center;"><?php echo number_format($val->BERAT,0,',','.'); ?> <?php echo $val->kode_satuan; ?></td>
             <td style="text-align: right;"><?php echo number_format($val->HARGA,0,',','.'); ?></td>
-            <td style="text-align: right;"><?php echo number_format($val->JUMLAH,0,',','.'); ?></td>
+            <!-- <td style="text-align: right;"><?php echo number_format($val->JUMLAH,0,',','.'); ?></td> -->
         </tr>
     <?php
         }
@@ -174,76 +158,20 @@ float:right;
     </tbody>
 </table>
 <br>
-<table align="left" class="tabel">
-    <thead>
-        <tr>
-            <th style="width:30px; text-align: center;">NO</th>
-            <th style="width:300px; text-align: center;">JASA</th>
-            <th style="width:100px; text-align: center;">&nbsp;</th>
-            <th style="width:100px; text-align: center;">&nbsp;</th>
-            <th style="width:200px; text-align: center;">BIAYA</th>
-        </tr>
-    </thead>
-    <tbody>
-    <?php
-        $sj = "
-            SELECT
-                a.*,
-                b.nama_jasa,
-                b.biaya
-            FROM do_jasa a
-            LEFT JOIN master_jasa b ON b.id_jasa = a.ID_JASA
-            WHERE a.ID_DO = '$id_do'
-        ";
-        $qryj = $this->db->query($sj);
-        $resj = $qryj->result();
-        $no2 = 0;
-        $tot_jasa = 0;
-
-        foreach ($resj as $key => $value) {
-            $no2++;
-            $tot_jasa += $value->biaya;
-    ?>
-        <tr>
-            <td style="text-align: center;"><?php echo $no2; ?></td>
-            <td style="text-align: center;"><?php echo $value->nama_jasa; ?></td>
-            <td style="text-align: center;">&nbsp;</td>
-            <td style="text-align: center;">&nbsp;</td>
-            <td style="text-align: right;"><?php echo number_format($value->biaya,0,',','.'); ?></td>
-        </tr>
-    <?php
-        }
-
-        $grandtotal = $tot_jumlah + $tot_jasa;
-    ?>
-        <tr>
-            <td style="text-align: center; font-weight: bold;" colspan="4">TOTAL</td>
-            <td style="text-align: right; font-weight: bold;"><?php echo number_format($grandtotal,0,',','.'); ?></td>
-        </tr>
-    </tbody>
-</table>
-
+<p>Kendaraan No. : .............................................</p>
 <div class="footer">
     <table align="left" class="ttd">
         <tr>
-            <td style="text-align:center; width:130px;">Dibuat</td>
-            <td style="text-align:center; width:130px;">Mengetahui / Gudang</td>
-            <td style="text-align:center; width:130px;">Pengirim</td>
-            <td style="text-align:center; width:130px;">Penerima</td>
+            <td style="text-align:center; vertical-align: middle; width:130px;">Hormat kami,</td>
+            <!-- <td style="text-align:center; vertical-align: middle; width:130px;">Mengetahui / Gudang</td> -->
+            <td style="text-align:center; vertical-align: middle; width:130px;">Sopir</td>
+            <td style="text-align:center; vertical-align: middle; width:130px;">Penerima </td>
         </tr>
         <tr>
-            <td style="height:100px; width:130px;">&nbsp;</td>
-            <td style="height:100px; width:130px;">&nbsp;</td>
-            <td style="height:100px; width:130px;">&nbsp;</td>
-            <td style="height:100px; width:130px;">&nbsp;</td>
-        </tr>
-    </table>
-
-    <br/><br/>
-
-    <table align="left">
-        <tr>
-            <td>Cetak : <?php echo date('d-m-Y'); ?></td>
+            <td style="height:80px; width:130px;">&nbsp;</td>
+            <!-- <td style="height:80px; width:130px;">&nbsp;</td> -->
+            <td style="height:80px; width:130px;">&nbsp;</td>
+            <td style="height:80px; width:130px;">&nbsp;</td>
         </tr>
     </table>
 </div>
@@ -268,7 +196,7 @@ float:right;
     // $html2pdf->Output($filename.'.pdf');
 
     $content = ob_get_clean();
-    $html2pdf = new HTML2PDF('P','A4','fr');
+    $html2pdf = new HTML2PDF('L','A5','fr');
     $html2pdf->pdf->SetTitle('Surat Jalan');
     $html2pdf->WriteHTML($content, isset($_GET['vuehtml']));
     $html2pdf->Output($filename.'.pdf');

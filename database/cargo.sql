@@ -1,35 +1,33 @@
 -- phpMyAdmin SQL Dump
--- version 4.8.0.1
--- https://www.phpmyadmin.net/
+-- version 4.2.7.1
+-- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 18, 2018 at 07:02 AM
--- Server version: 10.1.32-MariaDB
--- PHP Version: 5.6.36
+-- Generation Time: 18 Jul 2018 pada 22.30
+-- Versi Server: 5.6.20
+-- PHP Version: 5.5.15
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
-START TRANSACTION;
 SET time_zone = "+00:00";
 
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+/*!40101 SET NAMES utf8 */;
 
 --
--- Database: `cargo_lokal`
+-- Database: `cargo`
 --
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `delivery_order`
+-- Struktur dari tabel `delivery_order`
 --
 
-CREATE TABLE `delivery_order` (
-  `ID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `delivery_order` (
+`ID` int(11) NOT NULL,
   `NOMOR_DO` varchar(100) DEFAULT NULL,
   `ID_TUJUAN` int(11) DEFAULT NULL,
   `TGL_DO_MSK` varchar(15) DEFAULT NULL,
@@ -37,94 +35,91 @@ CREATE TABLE `delivery_order` (
   `ID_PELANGGAN` int(11) DEFAULT NULL,
   `NOMOR_INVOICE` varchar(10) DEFAULT NULL,
   `TANGGAL_INVOICE` varchar(10) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `delivery_order`
+-- Dumping data untuk tabel `delivery_order`
 --
 
 INSERT INTO `delivery_order` (`ID`, `NOMOR_DO`, `ID_TUJUAN`, `TGL_DO_MSK`, `TGL_PENGIRIMAN`, `ID_PELANGGAN`, `NOMOR_INVOICE`, `TANGGAL_INVOICE`) VALUES
-(1, '10', 1, '18-07-2018', '19-07-2018', 1, '001', '18-07-2018');
+(1, '001', 1, '18-07-2018', '19-07-2018', 2, '001', '18-07-2018'),
+(2, '003', 1, '18-07-2018', '19-07-2018', 2, '001', '18-07-2018');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `do_detail`
+-- Struktur dari tabel `do_detail`
 --
 
-CREATE TABLE `do_detail` (
-  `ID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `do_detail` (
+`ID` int(11) NOT NULL,
   `ID_DO` int(11) DEFAULT NULL,
   `ID_BARANG` int(11) DEFAULT NULL,
   `BERAT` double DEFAULT NULL,
   `HARGA` double DEFAULT NULL,
   `JUMLAH` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `do_detail`
+-- Dumping data untuk tabel `do_detail`
 --
 
 INSERT INTO `do_detail` (`ID`, `ID_DO`, `ID_BARANG`, `BERAT`, `HARGA`, `JUMLAH`) VALUES
-(1, 1, 1, 100, 50000, 5000000),
-(2, 1, 2, 50, 10000, 500000);
+(1, 1, 1, 10, 550000, 550000),
+(2, 1, 2, 1, 300000, 300000),
+(3, 2, 4, 1, 0, 0);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `do_jasa`
+-- Struktur dari tabel `do_jasa`
 --
 
-CREATE TABLE `do_jasa` (
-  `ID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `do_jasa` (
+`ID` int(11) NOT NULL,
   `ID_DO` int(11) DEFAULT NULL,
   `ID_JASA` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
---
--- Dumping data for table `do_jasa`
---
-
-INSERT INTO `do_jasa` (`ID`, `ID_DO`, `ID_JASA`) VALUES
-(1, 1, 1);
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_barang`
+-- Struktur dari tabel `master_barang`
 --
 
-CREATE TABLE `master_barang` (
-  `id_barang` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `master_barang` (
+`id_barang` int(11) NOT NULL,
+  `kode_barang` varchar(255) DEFAULT NULL,
   `nama_barang` text NOT NULL,
-  `jumlah` double(255,0) DEFAULT NULL,
-  `harga_total` double DEFAULT NULL,
+  `jumlah` varchar(255) DEFAULT NULL,
+  `harga_total` varchar(255) DEFAULT NULL,
   `id_satuan` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=5 ;
 
 --
--- Dumping data for table `master_barang`
+-- Dumping data untuk tabel `master_barang`
 --
 
-INSERT INTO `master_barang` (`id_barang`, `nama_barang`, `jumlah`, `harga_total`, `id_satuan`) VALUES
-(1, 'Beras', 1, 500000, 6),
-(2, 'Gula', 0, 0, 6),
-(3, 'Garam', 0, 0, 6);
+INSERT INTO `master_barang` (`id_barang`, `kode_barang`, `nama_barang`, `jumlah`, `harga_total`, `id_satuan`) VALUES
+(1, 'P-0013202', 'Beras', '1', '5000', 6),
+(2, 'P-0043353', 'Gula', '0', '0', 6),
+(3, 'P-0038739', 'Garam', '0', '0', 6),
+(4, 'P-849292', 'ZTE', '0', '0', 6);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_jasa`
+-- Struktur dari tabel `master_jasa`
 --
 
-CREATE TABLE `master_jasa` (
-  `id_jasa` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `master_jasa` (
+`id_jasa` int(11) NOT NULL,
   `nama_jasa` varchar(255) DEFAULT NULL,
   `biaya` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 --
--- Dumping data for table `master_jasa`
+-- Dumping data untuk tabel `master_jasa`
 --
 
 INSERT INTO `master_jasa` (`id_jasa`, `nama_jasa`, `biaya`) VALUES
@@ -134,11 +129,11 @@ INSERT INTO `master_jasa` (`id_jasa`, `nama_jasa`, `biaya`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_pelanggan`
+-- Struktur dari tabel `master_pelanggan`
 --
 
-CREATE TABLE `master_pelanggan` (
-  `id_pelanggan` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `master_pelanggan` (
+`id_pelanggan` int(11) NOT NULL,
   `kode_pelanggan` varchar(50) NOT NULL,
   `nama_pelanggan` varchar(100) NOT NULL,
   `alamat_pelanggan` text NOT NULL,
@@ -147,10 +142,10 @@ CREATE TABLE `master_pelanggan` (
   `npwp` varchar(50) NOT NULL,
   `akun_debit` varchar(255) DEFAULT NULL,
   `akun_kredit` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
 
 --
--- Dumping data for table `master_pelanggan`
+-- Dumping data untuk tabel `master_pelanggan`
 --
 
 INSERT INTO `master_pelanggan` (`id_pelanggan`, `kode_pelanggan`, `nama_pelanggan`, `alamat_pelanggan`, `telp`, `email`, `npwp`, `akun_debit`, `akun_kredit`) VALUES
@@ -163,19 +158,19 @@ INSERT INTO `master_pelanggan` (`id_pelanggan`, `kode_pelanggan`, `nama_pelangga
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_rute`
+-- Struktur dari tabel `master_rute`
 --
 
-CREATE TABLE `master_rute` (
-  `id_rute` int(255) NOT NULL,
+CREATE TABLE IF NOT EXISTS `master_rute` (
+`id_rute` int(255) NOT NULL,
   `asal` varchar(255) DEFAULT NULL,
   `tujuan_provinsi` varchar(255) DEFAULT NULL,
   `tujuan` varchar(255) DEFAULT NULL,
   `biaya` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=982 ;
 
 --
--- Dumping data for table `master_rute`
+-- Dumping data untuk tabel `master_rute`
 --
 
 INSERT INTO `master_rute` (`id_rute`, `asal`, `tujuan_provinsi`, `tujuan`, `biaya`) VALUES
@@ -933,7 +928,7 @@ INSERT INTO `master_rute` (`id_rute`, `asal`, `tujuan_provinsi`, `tujuan`, `biay
 (752, 'Surabaya', 'N T B', 'Sumbawa Utan Rhee', '3650000'),
 (753, 'Surabaya', 'N T B', 'Dompu Kota', '3150000'),
 (754, 'Surabaya', 'N T B', 'Dompu Pajo', '3150000'),
-(755, 'Surabaya', 'N T B', 'Dompu Hu\'u', '3150000'),
+(755, 'Surabaya', 'N T B', 'Dompu Hu''u', '3150000'),
 (756, 'Surabaya', 'N T B', 'Dompu Kilo', '3150000'),
 (757, 'Surabaya', 'N T B', 'Dompu Woja', '3150000'),
 (758, 'Surabaya', 'N T B', 'Dompu Manggelewa', '3150000'),
@@ -1163,20 +1158,20 @@ INSERT INTO `master_rute` (`id_rute`, `asal`, `tujuan_provinsi`, `tujuan`, `biay
 -- --------------------------------------------------------
 
 --
--- Table structure for table `master_satuan`
+-- Struktur dari tabel `master_satuan`
 --
 
-CREATE TABLE `master_satuan` (
-  `id_satuan` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `master_satuan` (
+`id_satuan` int(11) NOT NULL,
   `kode_satuan` varchar(50) NOT NULL,
   `nama_satuan` varchar(50) NOT NULL,
   `konversi` varchar(255) DEFAULT NULL,
   `satuan_utama` varchar(255) DEFAULT NULL,
   `tipe_satuan` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=7 ;
 
 --
--- Dumping data for table `master_satuan`
+-- Dumping data untuk tabel `master_satuan`
 --
 
 INSERT INTO `master_satuan` (`id_satuan`, `kode_satuan`, `nama_satuan`, `konversi`, `satuan_utama`, `tipe_satuan`) VALUES
@@ -1189,40 +1184,40 @@ INSERT INTO `master_satuan` (`id_satuan`, `kode_satuan`, `nama_satuan`, `konvers
 -- --------------------------------------------------------
 
 --
--- Table structure for table `nomor`
+-- Struktur dari tabel `nomor`
 --
 
-CREATE TABLE `nomor` (
-  `ID` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `nomor` (
+`ID` int(11) NOT NULL,
   `NOMOR` int(11) DEFAULT NULL,
   `JENIS` text
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 --
--- Dumping data for table `nomor`
+-- Dumping data untuk tabel `nomor`
 --
 
 INSERT INTO `nomor` (`ID`, `NOMOR`, `JENIS`) VALUES
-(1, 1, 'Invoice');
+(1, 2, 'Invoice');
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `tb_user`
+-- Struktur dari tabel `tb_user`
 --
 
-CREATE TABLE `tb_user` (
-  `id` int(11) NOT NULL,
+CREATE TABLE IF NOT EXISTS `tb_user` (
+`id` int(11) NOT NULL,
   `username` varchar(100) NOT NULL,
   `password` varchar(100) NOT NULL,
   `nama_user` varchar(100) NOT NULL,
   `foto` text NOT NULL,
   `departemen` varchar(255) DEFAULT NULL,
   `level` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
 
 --
--- Dumping data for table `tb_user`
+-- Dumping data untuk tabel `tb_user`
 --
 
 INSERT INTO `tb_user` (`id`, `username`, `password`, `nama_user`, `foto`, `departemen`, `level`) VALUES
@@ -1237,61 +1232,61 @@ INSERT INTO `tb_user` (`id`, `username`, `password`, `nama_user`, `foto`, `depar
 -- Indexes for table `delivery_order`
 --
 ALTER TABLE `delivery_order`
-  ADD PRIMARY KEY (`ID`) USING BTREE;
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `do_detail`
 --
 ALTER TABLE `do_detail`
-  ADD PRIMARY KEY (`ID`) USING BTREE;
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `do_jasa`
 --
 ALTER TABLE `do_jasa`
-  ADD PRIMARY KEY (`ID`) USING BTREE;
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `master_barang`
 --
 ALTER TABLE `master_barang`
-  ADD PRIMARY KEY (`id_barang`) USING BTREE;
+ ADD PRIMARY KEY (`id_barang`) USING BTREE;
 
 --
 -- Indexes for table `master_jasa`
 --
 ALTER TABLE `master_jasa`
-  ADD PRIMARY KEY (`id_jasa`) USING BTREE;
+ ADD PRIMARY KEY (`id_jasa`);
 
 --
 -- Indexes for table `master_pelanggan`
 --
 ALTER TABLE `master_pelanggan`
-  ADD PRIMARY KEY (`id_pelanggan`) USING BTREE;
+ ADD PRIMARY KEY (`id_pelanggan`) USING BTREE;
 
 --
 -- Indexes for table `master_rute`
 --
 ALTER TABLE `master_rute`
-  ADD PRIMARY KEY (`id_rute`) USING BTREE;
+ ADD PRIMARY KEY (`id_rute`);
 
 --
 -- Indexes for table `master_satuan`
 --
 ALTER TABLE `master_satuan`
-  ADD PRIMARY KEY (`id_satuan`) USING BTREE;
+ ADD PRIMARY KEY (`id_satuan`) USING BTREE;
 
 --
 -- Indexes for table `nomor`
 --
 ALTER TABLE `nomor`
-  ADD PRIMARY KEY (`ID`) USING BTREE;
+ ADD PRIMARY KEY (`ID`);
 
 --
 -- Indexes for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  ADD PRIMARY KEY (`id`) USING BTREE;
+ ADD PRIMARY KEY (`id`) USING BTREE;
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -1301,63 +1296,52 @@ ALTER TABLE `tb_user`
 -- AUTO_INCREMENT for table `delivery_order`
 --
 ALTER TABLE `delivery_order`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 --
 -- AUTO_INCREMENT for table `do_detail`
 --
 ALTER TABLE `do_detail`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `do_jasa`
 --
 ALTER TABLE `do_jasa`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT;
 --
 -- AUTO_INCREMENT for table `master_barang`
 --
 ALTER TABLE `master_barang`
-  MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+MODIFY `id_barang` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=5;
 --
 -- AUTO_INCREMENT for table `master_jasa`
 --
 ALTER TABLE `master_jasa`
-  MODIFY `id_jasa` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-
+MODIFY `id_jasa` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=4;
 --
 -- AUTO_INCREMENT for table `master_pelanggan`
 --
 ALTER TABLE `master_pelanggan`
-  MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
+MODIFY `id_pelanggan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=6;
 --
 -- AUTO_INCREMENT for table `master_rute`
 --
 ALTER TABLE `master_rute`
-  MODIFY `id_rute` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=981;
-
+MODIFY `id_rute` int(255) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=982;
 --
 -- AUTO_INCREMENT for table `master_satuan`
 --
 ALTER TABLE `master_satuan`
-  MODIFY `id_satuan` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
-
+MODIFY `id_satuan` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=7;
 --
 -- AUTO_INCREMENT for table `nomor`
 --
 ALTER TABLE `nomor`
-  MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
+MODIFY `ID` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=2;
 --
 -- AUTO_INCREMENT for table `tb_user`
 --
 ALTER TABLE `tb_user`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
-COMMIT;
-
+MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,AUTO_INCREMENT=3;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

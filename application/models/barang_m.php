@@ -36,19 +36,21 @@ class Barang_m extends CI_Model
 		return $this->db->query($sql)->result();
 	}
 
-	function simpan_data_barang($nama_barang,$jumlah,$id_satuan,$harga_total)
+	function simpan_data_barang($nama_barang,$jumlah,$id_satuan, $kode_barang, $harga_barang)
 	{
 		$sql = "
 			INSERT INTO master_barang (
+				kode_barang,
 				nama_barang,
 				jumlah,
 				id_satuan,
 				harga_total
 			) VALUES (
+				'$kode_barang',
 				'$nama_barang',
 				'$jumlah',
 				'$id_satuan',
-				'$harga_total'
+				'$harga_barang'
 			)";
 		$this->db->query($sql);
 	}

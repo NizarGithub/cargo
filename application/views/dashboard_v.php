@@ -41,8 +41,7 @@
 					<div class="col-lg-3 col-md-3 col-sm-6 col-xs-12">
 						<?php
 							$sql2 = "
-								SELECT
-									(a.JUMLAH + a.BIAYA) AS JUMLAH
+								SELECT (IFNULL(a.JUMLAH,0) + IFNULL(a.BIAYA,0)) AS JUMLAH
 								FROM(
 									SELECT 
 										SUM(b.JUMLAH) AS JUMLAH,
@@ -51,7 +50,6 @@
 									LEFT JOIN do_detail b ON b.ID_DO = a.ID
 									LEFT JOIN(
 										SELECT
-											a.ID,
 											a.ID_DO,
 											SUM(b.biaya) AS biaya
 										FROM do_jasa a
@@ -59,7 +57,6 @@
 										GROUP BY a.ID_DO
 									) c ON c.ID_DO = a.ID
 									WHERE a.TGL_DO_MSK = '$now'
-									GROUP BY a.TGL_DO_MSK
 								) a
 							";
 							$qry2 = $this->db->query($sql2);
@@ -71,10 +68,10 @@
 							</div>
 							<div class="details">
 								<div class="number">
-									<?php echo number_format($total2,'0',',','.'); ?>
+									Rp <?php echo number_format($total2,'0',',','.'); ?>
 								</div>
 								<div class="desc">
-									 Total Nilai DO
+									 Total Tagihan Invoice Hari Ini
 								</div>
 							</div>
 							<a class="more" href="javascript:;">

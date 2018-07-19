@@ -36,12 +36,16 @@ class Barang_c extends CI_Controller {
 
 	function simpan()
 	{
+		$kode_barang   	= $this->input->post('kode_barang');
 		$nama_barang 	= $this->input->post('nama_barang');
 		$jumlah 		= '0';
 		$id_satuan   	= $this->input->post('id_satuan');
 		$harga_total  	= '0';
 
-		$this->barang->simpan_data_barang($nama_barang,$jumlah,$id_satuan,$harga_total);
+		$harga_barang      = $this->input->post('harga_barang');
+		$harga_barang      = str_replace(',', '', $harga_barang);
+
+		$this->barang->simpan_data_barang($nama_barang,$jumlah,$id_satuan,$kode_barang, $harga_barang);
 
 		$this->session->set_flashdata('sukses','1');
 		redirect('barang_c');

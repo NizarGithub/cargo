@@ -132,7 +132,7 @@ function klik_barang(id){
 					'<td>'+row['nama_barang']+'</td>'+
 					'<td>'+row['kode_satuan']+'</td>'+
 					'<td align="center"><input type="text" class="form-control" name="berat[]" style="width:125px;" onkeyup="FormatCurrency(this);"></td>'+
-					'<td align="center"><input type="text" class="form-control" name="harga[]" style="width:125px;" onkeyup="FormatCurrency(this);"></td>'+
+					'<td align="center">'+row['harga_total']+'</td>'+
 					'<td align="center"><input type="text" class="form-control" name="jumlah[]" style="width:125px;" onkeyup="FormatCurrency(this);"></td>'+
 					'<td align="center"><button type="button" class="btn red" onclick="deleteRow(this);"><i class="fa fa-trash"></i></button></td>'+
 				  '</tr>';
@@ -195,7 +195,7 @@ function get_tujuan(){
 
 					$tr +=  '<tr onclick="klik_tujuan('+result[i].id_rute+');">'+
 		                    '	<td style="cursor:pointer; vertical-align:middle; text-align:center;">'+no+'</td>'+
-		                    '   <td style="cursor:pointer; vertical-align:middle;">'+result[i].tujuan+'</td>'+
+		                    '   <td style="cursor:pointer; vertical-align:middle;">'+result[i].tujuan+' - Rp '+NumberToMoney(result[i].biaya).split('.00').join('')+'</td>'+
 		                    '</tr>';
 				}
 			}
@@ -222,7 +222,7 @@ function klik_tujuan(id){
 		dataType : "json",
 		success : function(row){
 			$('#id_tujuan').val(id);
-			$('#tujuan_txt').val(row['tujuan']);
+			$('#tujuan_txt').val(row['tujuan']+' - Rp '+NumberToMoney(row['biaya']).split('.00').join(''));
 		}
 	});
 }
@@ -344,7 +344,7 @@ function klik_pelanggan(id){
 									<th style="text-align:center;"> Tanggal DO Masuk </th>
 									<th style="text-align:center;"> Tanggal Pengiriman </th>
 									<th style="text-align:center;"> Surat Jalan </th>
-									<th style="text-align:center;"> Cetak DO </th>
+									<th style="text-align:center;"> Cetak Invoice </th>
 								</tr>
 							</thead>
 							<tbody>
@@ -405,7 +405,7 @@ function klik_pelanggan(id){
 												</div>
 											</div>
 											<span class="input-group-btn btn-right">
-												<button type="button" class="btn green-haze" id="cari_barang">Cari</button>
+												<button type="button" class="btn green-haze" style="height: 34px;" id="cari_barang">Cari</button>
 											</span>
 										</div>
 									</div>
@@ -416,12 +416,12 @@ function klik_pelanggan(id){
 										<table class="table table-bordered" id="tabel_add_barang">
 											<thead>
 												<tr class="info">
-													<th style="text-align:center;"> Nama Barang</th>
-													<th style="text-align:center;"> Satuan</th>
-													<th style="text-align:center;"> Berat </th>
-													<th style="text-align:center;"> Harga </th>
-													<th style="text-align:center;"> Jumlah </th>
-													<th style="text-align:center;"> # </th>
+													<th style="text-align:center; background: #003666;"> Nama Barang</th>
+													<th style="text-align:center; background: #003666;"> Satuan</th>
+													<th style="text-align:center; background: #003666;"> Berat </th>
+													<th style="text-align:center; background: #003666;"> Harga </th>
+													<th style="text-align:center; background: #003666;"> Jumlah </th>
+													<th style="text-align:center; background: #003666;"> # </th>
 												</tr>
 											</thead>
 											<tbody>
@@ -431,9 +431,9 @@ function klik_pelanggan(id){
 										<table class="table table-bordered" id="tabel_add_jasa">
 											<thead>
 												<tr class="info">
-													<th style="text-align:center;"> # </th>
-													<th style="text-align:center;"> Jasa</th>
-													<th style="text-align:center;"> Biaya</th>
+													<th style="text-align:center; background: #003666;"> # </th>
+													<th style="text-align:center; background: #003666;"> Local In Charge</th>
+													<th style="text-align:center; background: #003666;"> Biaya</th>
 												</tr>
 											</thead>
 											<tbody>
@@ -473,7 +473,7 @@ function klik_pelanggan(id){
 												</div>
 											</div>
 											<span class="input-group-btn btn-right">
-												<button type="button" class="btn green-haze" id="cari_tujuan">Cari</button>
+												<button type="button" class="btn green-haze" style="height: 34px;" id="cari_tujuan">Cari</button>
 											</span>
 										</div>
 									</div>
@@ -501,6 +501,18 @@ function klik_pelanggan(id){
 									</div>
 								</div>
 								<div class="form-group">
+									<label class="col-md-2 control-label" for="form_control_1">Nama Penerima</label>
+									<div class="col-md-4">
+										<div class="">
+											<div class="input-group-control">
+												<input type="text" class="form-control" id="penerima" name="penerima" value="" style="width: 100%;">
+												<div class="form-control-focus">
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group">
 									<label class="col-md-2 control-label" for="form_control_1">Pelanggan</label>
 									<div class="col-md-4">
 										<div class="input-group input-group-sm">
@@ -511,7 +523,7 @@ function klik_pelanggan(id){
 												</div>
 											</div>
 											<span class="input-group-btn btn-right">
-												<button type="button" class="btn green-haze" id="cari_pelanggan">Cari</button>
+												<button type="button" class="btn green-haze" style="height: 34px;" id="cari_pelanggan">Cari</button>
 											</span>
 										</div>
 									</div>

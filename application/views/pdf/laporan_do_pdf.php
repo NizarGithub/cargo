@@ -1,30 +1,36 @@
-<?PHP  ob_start(); ?>
+<?PHP  
+ob_start(); 
+?>
 
 <style>
 .grid th {
-    background: #1793d1;
+    background: #FFF;
     vertical-align: middle;
-    color : #FFF;
+    color : #000;
     width: 140px;
     text-align: center;
     height: 40px;
+    border: solid;
+    font-size: 12px;
 }
 .grid td {
-    background: #FFFFF0;
+    background: #FFF;
+    border :1px solid #000;
     vertical-align: middle;
     font: 11px/15px sans-serif;
-    height: 30px;
-    padding-left: 5px;
-    padding-right: 5px;
+    height: 20px;
+    padding-left: 4px;
+    padding-right: 4px;
     padding-top: 3px;
     padding-bottom: 3px;
+    border-collapse: separate;
 }
 .grid {
-    background: #FAEBD7;
-    border: 2px solid #C5C5C5;
+    background: #FFF;
+    border: 1px solid #000;
     width: 900px;
-    border-spacing: 0;
     table-layout: fixed;
+    border-collapse: collapse;
 }
 
 .judul{
@@ -33,11 +39,10 @@
 
 .kolom_header {
     height        : 40px;
-    background    : #dadada ;
+    background    : #FFF ;
     font-weight   : bold; 
     text-align    : center;
-    border-style  : solid;
-    border-width  : thin;
+    border  : 1px solid #000;
     font-size     : 12px; 
   }
 
@@ -49,21 +54,50 @@
 
 .isi_table  {
     font-size     : 11px;
-    border-style  : solid;
-    border-width  : thin;   
+    border  : 1px solid #000;  
     text-align    : left;
+}
+
+.footer{
+    position:absolute;
+    left:0;
+    bottom:0;
+}
+
+.ttd{
+    border-collapse: collapse;
+    border: 1px solid black;
+}
+.ttd td{
+    background: #fff;
+    height: 30px;
+    font-size: 14px;
+    border: 1px solid black;
 }
 </style>
 
+<div style="margin-left: 0px;">
 <table align="left">
     <tr>
         <td>
-            <img src="<?=base_url();?>files/cargo/logo-pdamtp.png" width="110" height="90" alt="KOP PDAM">
+            <h5>PT. MAHKOTA TERAJU INDUKJARI</h5>
+            Tangerang, Banten, Indonesia<br>
+            Pergudangan Ritz Gate Blok AF 10<br>Gedangan, Sidoarjo
         </td>
     </tr>
 </table>
 
-<table align="right" style="margin-top:-100px;">
+<table align="center" style="margin-top:-80px; margin-left: -50px;">
+    <tr>
+        <td style="text-align:center;">
+            <h2 style="font-family:Arial; font-weight:bold; line-height:1.4;">
+                INVOICE
+            </h2>
+        </td>
+    </tr>
+</table>
+
+<table align="right" style="margin-top:-70px; margin-left:-80px;">
     <tr>
         <td>Nomor Invoice</td>
         <td>:</td>
@@ -75,51 +109,33 @@
         <td><?php echo $data->TANGGAL_INVOICE; ?></td>
     </tr>
     <tr>
+        <td>No. DO</td>
+        <td>:</td>
+        <td><?php echo $data->NOMOR_DO;; ?></td>
+    </tr>
+    <tr>
         <td>Nama Pelanggan</td>
         <td>:</td>
         <td><?php echo $data->nama_pelanggan; ?></td>
     </tr>
-    <tr>
-        <td>Telepon</td>
-        <td>:</td>
-        <td><?php echo $data->telp;; ?></td>
-    </tr>
 </table>
-
-<table align="center">
-    <tr>
-        <td style="text-align:center;">
-            <h3 style="font-family:Arial; font-weight:normal; line-height:1.4;">
-                LAPORAN DELIVERY ORDER
-            </h3>
-        </td>
-    </tr>
-</table>
-
+<br><br>
 <table class="grid">
     <tr>
         <th rowspan="2" style="width:30px;">NO</th>
-        <th rowspan="2">NOMOR DO</th>
+        <th rowspan="2" style="width: 120px;">NOMOR DO</th>
         <th rowspan="2">TUJUAN</th>
-        <th rowspan="2">JENIS BARANG</th>
+        <th rowspan="2" style="width: 150px;">DESKRIPSI</th>
         <th rowspan="2" style="width:90px;">BERAT</th>
-        <th rowspan="2" style="width:100px;">HARGA</th>
-        <th rowspan="2">JUMLAH</th>
+        <th rowspan="2" style="width:120px;">HARGA</th>
+        <th rowspan="2" style="width: 120px;">JUMLAH</th>
         <th colspan="2">KETERANGAN</th>
     </tr>
     <tr>
-        <th>TGL MASUK DO</th>
-        <th>TGL PENGIRIMAN</th>
+        <th style="border-left: none;">TGL MSK DO</th>
+        <th>TGL KIRIM</th>
     </tr>
 
-    <tr>
-        <td style="text-align: center;">&nbsp;</td>
-        <td style="text-align: center;"><?php echo $data->NOMOR_DO; ?></td>
-        <td style="text-align: center;"><?php echo $data->tujuan; ?></td>
-        <td style="text-align: center;" colspan="4">&nbsp;</td>
-        <td style="text-align: center;"><?php echo $data->TGL_DO_MSK; ?></td>
-        <td style="text-align: center;"><?php echo $data->TGL_PENGIRIMAN; ?></td>
-    </tr>
     <?php
         $id_do = $data->ID;
         $sql = "SELECT
@@ -139,27 +155,38 @@
         $res = $qry->result();
         $no = 0;
         $tot_jumlah = 0;
-
+        $no_do = "";
+        $tujuan = "";
+        $tgl_do = "";
         foreach ($res as $key => $val) {
             $no++;
             $tot_jumlah += $val->JUMLAH;
+            if($key == 0){
+                $no_do = $data->NOMOR_DO;
+                $tujuan = $data->tujuan;
+                $tgl_do = $data->TGL_DO_MSK;
+                $tgl_kirim = $data->TGL_PENGIRIMAN;
+            } else {
+                $no_do = "";
+                $tujuan = "";
+                $tgl_do = "";
+                $tgl_kirim = "";
+            }
     ?>
         <tr>
             <td style="text-align: center;"><?php echo $no; ?></td>
-            <td style="text-align: center;">&nbsp;</td>
-            <td style="text-align: center;">&nbsp;</td>
-            <td style="text-align: center;"><?php echo $val->nama_barang; ?></td>
+            <td style="text-align: center;"><?php echo $no_do; ?></td>
+            <td style="text-align: center;"><?php echo $tujuan; ?></td>
+            <td style="text-align: left;"><?php echo $val->nama_barang; ?></td>
             <td style="text-align: center;"><?php echo number_format($val->BERAT,0,',','.'); ?> <?php echo $val->kode_satuan; ?></td>
-            <td style="text-align: right;"><?php echo number_format($val->HARGA,0,',','.'); ?></td>
-            <td style="text-align: right;"><?php echo number_format($val->JUMLAH,0,',','.'); ?></td>
-            <td style="text-align: center;">&nbsp;</td>
-            <td style="text-align: center;">&nbsp;</td>
+            <td style="text-align: right;">Rp <?php echo number_format($val->HARGA,0,',','.'); ?></td>
+            <td style="text-align: right;">Rp <?php echo number_format($val->JUMLAH,0,',','.'); ?></td>
+            <td style="text-align: center;"><?=$tgl_do;?></td>
+            <td style="text-align: center;"><?=$tgl_kirim;?></td>
         </tr>
     <?php
         }
     ?>
-    
-    <tr><td colspan="9">&nbsp;</td></tr>
 
     <?php
         $sj = "
@@ -187,7 +214,7 @@
             <td style="text-align: center;">&nbsp;</td>
             <td style="text-align: center;">&nbsp;</td>
             <td style="text-align: center;">&nbsp;</td>
-            <td style="text-align: right;"><?php echo number_format($value->biaya,0,',','.'); ?></td>
+            <td style="text-align: right;">Rp <?php echo number_format($value->biaya,0,',','.'); ?></td>
             <td style="text-align: center;">&nbsp;</td>
             <td style="text-align: center;">&nbsp;</td>
         </tr>
@@ -199,12 +226,12 @@
 
         <tr>
             <td style="text-align: center; font-weight: bold;" colspan="6">TOTAL</td>
-            <td style="text-align: right; font-weight: bold;"><?php echo number_format($grandtotal,0,',','.'); ?></td>
+            <td style="text-align: right; font-weight: bold;">Rp <?php echo number_format($grandtotal,0,',','.'); ?></td>
             <td style="text-align: center;">&nbsp;</td>
             <td style="text-align: center;">&nbsp;</td>
         </tr>
 </table>
-
+</div>
 <?PHP
     $content = ob_get_clean();
     // require_once "localhost/siaga/material/fpdf/html2pdf.class.php";

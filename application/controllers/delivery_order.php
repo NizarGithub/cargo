@@ -19,7 +19,7 @@ class Delivery_order extends CI_Controller {
 	{
 		$data = array(
 				'title'    	=> 'Delivery Order',
-				'sub_menu' 	=> 'Laporan',
+				'sub_menu' 	=> 'Transaksi',
 				'sub_menu1'	=> 'Delivery Order',
 				'page' 	   	=> 'delivery_order_v',
 				'menu' 	   	=> 'laporan',
@@ -122,13 +122,13 @@ class Delivery_order extends CI_Controller {
 		if($total == 0){
 			$kode = $this->add_leading_zero(1,3);
 		}else{
-			$s = "SELECT * FROM nomor WHERE KETERANGAN = '$keterangan'";
+			$s = "SELECT * FROM nomor WHERE JENIS = '$keterangan'";
 			$q = $this->db->query($s)->row();
 			$next = $q->NEXT+1;
 			$kode = $this->add_leading_zero($next,3);
 		}
 
-		echo json_encode($kode);
+		return $kode;
 	}
 
 	function simpan_nomor(){
@@ -254,7 +254,7 @@ class Delivery_order extends CI_Controller {
 
 		$data = array(
 			'data' => $res,
-			'title' => 'Laporan Delivery Order',
+			'title' => 'Cetak Invoice',
 			'filename' => date('dmY').'_laporan_do'
 		);
 

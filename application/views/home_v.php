@@ -167,12 +167,39 @@ function MonthToString($month){
 
 				<li class ="mega-menu-dropdown">
 					<a data-toggle="dropdown" href="javascript:;" class="dropdown-toggle" data-hover="megamenu-dropdown" data-close-others="true">
-					Laporan  <i class="fa fa-angle-down"></i><span class="selected"></span>
+					Transaksi  <i class="fa fa-angle-down"></i><span class="selected"></span>
 					</a>
 					<ul class="dropdown-menu" style="min-width: 400px;">
 						<li <?php if ($menu2 == 'permintaan') { echo "class = 'active'";}?>>
 							<a href="<?php echo base_url(); ?>delivery_order">
-							<i class="fa fa-book"></i> Delivery Order </a>
+							<i class="fa fa-caret-right"></i> Delivery Order </a>
+						</li>
+					</ul>
+				</li>
+
+				<li class ="mega-menu-dropdown">
+					<a data-toggle="dropdown" href="javascript:;" class="dropdown-toggle" data-hover="megamenu-dropdown" data-close-others="true">
+					Laporan <i class="fa fa-angle-down"></i><span class="selected"></span>
+					</a>
+					<ul class="dropdown-menu" style="min-width: 400px;">
+						<li>
+							<!-- Content container to add padding -->
+							<div class="mega-menu-content">
+								<div class="row">
+									<div class="col-md-12">
+										<ul class="mega-menu-submenu">
+											<li <?php if ($menu2 == 'sum_do') { echo "class = 'active'";}?>>
+												<a href="<?php echo base_url(); ?>satuan_c">
+												<i class="fa fa-caret-right"></i> Summary Delivery Order </a>
+											</li>
+											<li <?php if ($menu2 == 'sum_inv') { echo "class = 'active'";}?>>
+												<a href="<?php echo base_url(); ?>pelanggan_c">
+												<i class="fa fa-caret-right"></i> Summary Invoice</a>
+											</li>
+										</ul>
+									</div>
+								</div>
+							</div>
 						</li>
 					</ul>
 				</li>
@@ -193,7 +220,7 @@ function MonthToString($month){
 					<a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
 					<!-- <img alt="" class="img-circle" src="<?php echo base_url(); ?>assets/admin/layout/img/avatar3_small.jpg"/> -->
 					<span class="username username-hide-on-mobile">
-					<?php echo $nama; ?> </span>
+					<?php echo ucwords($nama); ?> </span>
 					<i class="fa fa-angle-down"></i>
 					</a>
 					<ul class="dropdown-menu dropdown-menu-default">

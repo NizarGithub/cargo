@@ -148,7 +148,16 @@ function ubah_data_barang(id)
 			<div class="portlet-body form">
 				<form role="form" class="form-horizontal" method="post" action="<?php echo $url_simpan; ?>" enctype="multipart/form-data">
 					<div class="form-body">
-						<div class="form-group form-md-line-input">
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="form_control_1">Kode Barang</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" id="kode_barang" name="kode_barang" >
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+
+						<div class="form-group">
 							<label class="col-md-2 control-label" for="form_control_1">Nama Barang</label>
 							<div class="col-md-4">
 								<input type="text" class="form-control" id="nama_barang" name="nama_barang" >
@@ -156,7 +165,7 @@ function ubah_data_barang(id)
 								</div>
 							</div>
 						</div>
-						<!-- <div class="form-group form-md-line-input">
+						<!-- <div class="form-group">
 							<label class="col-md-2 control-label" for="form_control_1">Jumlah</label>
 							<div class="col-md-4">
 								<input required type="text" class="form-control" name="jumlah" id="jumlah" value="" onkeyup="FormatCurrency(this);">
@@ -180,7 +189,16 @@ function ubah_data_barang(id)
 								<input type="hidden" name="nama_satuan" id="nama_satuan">	
 							</div>
 						</div>
-						<!-- <div class="form-group form-md-line-input">
+
+						<div class="form-group">
+							<label class="col-md-2 control-label" for="form_control_1">Harga</label>
+							<div class="col-md-4">
+								<input type="text" class="form-control" id="harga_barang" name="harga_barang" onkeyup="FormatCurrency(this);">
+								<div class="form-control-focus">
+								</div>
+							</div>
+						</div>
+						<!-- <div class="form-group">
 							<label class="col-md-2 control-label" for="form_control_1">Harga Total</label>
 							<div class="col-md-4 input-group left-addon">
 								<span class="input-group-addon">Rp.</span>
@@ -225,8 +243,10 @@ Tambah Data Barang <i class="fa fa-plus"></i>
 					<thead>
 						<tr>
 							<th style="text-align:center;"> No</th>
+							<th style="text-align:center;"> Kode Barang</th>
 							<th style="text-align:center;"> Nama Barang</th>
 							<th style="text-align:center;"> Satuan</th>
+							<th style="text-align:center;"> Harga</th>
 							<th style="text-align:center;"> Aksi </th>
 						</tr>
 					</thead>
@@ -238,8 +258,10 @@ Tambah Data Barang <i class="fa fa-plus"></i>
 						?>
 						<tr>
 							<td style="text-align:center; vertical-align:"><?php echo $no; ?></td>
-							<td style="text-align:center; vertical-align:"><?php echo $value->nama_barang; ?></td>
+							<td style="text-align:center; vertical-align:"><?php echo $value->kode_barang; ?></td>
+							<td style="text-align:left; vertical-align:"><?php echo $value->nama_barang; ?></td>
 							<td style="text-align:center; vertical-align:"><?php echo $value->kode_satuan; ?></td>
+							<td style="text-align:right; vertical-align:">Rp <?php echo number_format($value->harga_total); ?></td>
 							<td style="text-align:center; vertical-align: middle;">
 								<a class="btn default btn-xs purple" id="ubah" onclick="ubah_data_barang(<?php echo $value->id_barang?>);"><i class="fa fa-edit"></i> Ubah </a>
 								<a class="btn default btn-xs red" id="hapus" onclick="hapus_barang(<?php echo $value->id_barang?>);"><i class="fa fa-trash-o"></i> Hapus </a>
