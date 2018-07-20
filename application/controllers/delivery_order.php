@@ -191,6 +191,7 @@ class Delivery_order extends CI_Controller {
 		$id_pelanggan = $this->input->post('id_pelanggan');
 		$nomor_invoice = $this->nomor_invoice();
 		$tanggal_invoice = date('d-m-Y');
+		$penerima = $this->input->post('penerima');
 
 		$sql = "
 			INSERT INTO delivery_order(
@@ -200,7 +201,8 @@ class Delivery_order extends CI_Controller {
 				TGL_PENGIRIMAN,
 				ID_PELANGGAN,
 				NOMOR_INVOICE,
-				TANGGAL_INVOICE
+				TANGGAL_INVOICE,
+				NAMA_PENERIMA
 			) VALUES (
 				'$nomor_do',
 				'$id_tujuan',
@@ -208,7 +210,8 @@ class Delivery_order extends CI_Controller {
 				'$tgl_pengiriman',
 				'$id_pelanggan',
 				'$nomor_invoice',
-				'$tanggal_invoice'
+				'$tanggal_invoice',
+				'$penerima'
 			)
 		";
 		$this->db->query($sql);

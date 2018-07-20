@@ -189,7 +189,7 @@ function MonthToString($month){
 									<div class="col-md-12">
 										<ul class="mega-menu-submenu">
 											<li <?php if ($menu2 == 'sum_do') { echo "class = 'active'";}?>>
-												<a href="<?php echo base_url(); ?>satuan_c">
+												<a href="<?php echo base_url(); ?>summary_do">
 												<i class="fa fa-caret-right"></i> Summary Delivery Order </a>
 											</li>
 											<li <?php if ($menu2 == 'sum_inv') { echo "class = 'active'";}?>>

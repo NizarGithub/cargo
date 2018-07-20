@@ -97,7 +97,7 @@ float:right;
     <tr>
         <td style="font-size: 14px; vertical-align: middle;">Penerima</td>
         <td style="font-size: 14px; vertical-align: middle;">:</td>
-        <td style="font-size: 14px; width:300px; vertical-align: middle;"><?php echo $data->nama_pelanggan; ?></td>
+        <td style="font-size: 14px; width:300px; vertical-align: middle;"><b><?php echo $data->NAMA_PENERIMA; ?></b></td>
         <td style="font-size: 14px; width:130px;">&nbsp;</td>
         <td style="font-size: 14px; vertical-align: middle;">Tujuan</td>
         <td style="font-size: 14px; vertical-align: middle;">:</td>
