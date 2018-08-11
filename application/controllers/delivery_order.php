@@ -56,12 +56,24 @@ class Delivery_order extends CI_Controller {
 	function get_tujuan(){
 		$keyword = $this->input->get('keyword');
 		$where = "1 = 1";
+		
 		if($keyword != ''){
 			$where = $where." AND (a.asal LIKE '%$keyword%' OR a.tujuan LIKE '%$keyword%')";
 		}else{
 			$where = $where;
 		}
-		$sql = "SELECT a.* FROM master_rute a WHERE $where";
+
+		$sql = "
+			SELECT 
+				a.id_rute,
+				a.asal,
+				a.tujuan,
+				IFNULL(b.nama_kendaraan,'-') AS nama_kendaraan,
+				IFNULL(b.biaya,0) AS biaya
+			FROM master_rute a 
+			LEFT JOIN master_kendaraan b ON b.id_rute = a.id_rute
+			WHERE $where
+		";
 		$qry = $this->db->query($sql);
 		$data = $qry->result();
 
@@ -70,7 +82,17 @@ class Delivery_order extends CI_Controller {
 
 	function klik_tujuan(){
 		$id = $this->input->post('id');
-		$sql = "SELECT a.* FROM master_rute a WHERE a.id_rute = '$id'";
+		$sql = "
+			SELECT 
+				a.id_rute,
+				a.asal,
+				a.tujuan,
+				IFNULL(b.nama_kendaraan,'-') AS nama_kendaraan,
+				IFNULL(b.biaya,0) AS biaya
+			FROM master_rute a 
+			LEFT JOIN master_kendaraan b ON b.id_rute = a.id_rute
+			WHERE a.id_rute = '$id'
+		";
 		$qry = $this->db->query($sql);
 		$data = $qry->row();
 

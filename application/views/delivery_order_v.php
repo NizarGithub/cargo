@@ -195,7 +195,9 @@ function get_tujuan(){
 
 					$tr +=  '<tr onclick="klik_tujuan('+result[i].id_rute+');">'+
 		                    '	<td style="cursor:pointer; vertical-align:middle; text-align:center;">'+no+'</td>'+
-		                    '   <td style="cursor:pointer; vertical-align:middle;">'+result[i].tujuan+' - Rp '+NumberToMoney(result[i].biaya).split('.00').join('')+'</td>'+
+		                    '   <td style="cursor:pointer; vertical-align:middle;">'+result[i].tujuan+'</td>'+
+		                    '   <td style="cursor:pointer; vertical-align:middle;">'+result[i].nama_kendaraan+'</td>'+
+		                    '   <td style="cursor:pointer; vertical-align:middle;">'+NumberToMoney(result[i].biaya).split('.00').join('')+'</td>'+
 		                    '</tr>';
 				}
 			}
@@ -222,7 +224,9 @@ function klik_tujuan(id){
 		dataType : "json",
 		success : function(row){
 			$('#id_tujuan').val(id);
-			$('#tujuan_txt').val(row['tujuan']+' - Rp '+NumberToMoney(row['biaya']).split('.00').join(''));
+			$('#tujuan_txt').val(row['tujuan']);
+			$('#kendaraan_txt').val(row['nama_kendaraan']);
+			$('#biaya_txt').val(NumberToMoney(row['biaya']).split('.00').join(''));
 		}
 	});
 }
@@ -383,15 +387,41 @@ function klik_pelanggan(id){
 							</tbody>
 						</table>
 					</div>
+
 					<div id="tab_2_2" class="tab-pane fade">
 						<form role="form" class="form-horizontal" method="post" action="<?php echo base_url(); ?>delivery_order/simpan" enctype="multipart/form-data">
 							<div class="form-body">
 								<div class="form-group">
-									<label class="col-md-2 control-label" for="form_control_1">Nomor DO</label>
+									<label class="col-md-2 control-label" for="form_control_1">Nomor DO / Reff</label>
 									<div class="col-md-4">
 										<input type="text" class="form-control" id="no_do" name="no_do" value="">
 										<div class="form-control-focus">
 										</div>
+									</div>
+								</div>
+								<hr>
+								<div class="form-group">
+									<label class="col-md-2 control-label" for="form_control_1">Tujuan</label>
+									<div class="col-md-2">
+										<div class="input-group input-group-sm">
+											<div class="input-group-control">
+												<input type="hidden" name="id_tujuan" id="id_tujuan" value="">
+												<input type="text" class="form-control" id="tujuan_txt" value="" readonly>
+												<div class="form-control-focus">
+												</div>
+											</div>
+											<span class="input-group-btn btn-right">
+												<button type="button" class="btn green-haze" style="height: 34px;" id="cari_tujuan">Cari</button>
+											</span>
+										</div>
+									</div>
+									<label class="col-md-1 control-label" for="form_control_1">Kendaraan</label>
+									<div class="col-md-2">
+										<input type="text" class="form-control" id="kendaraan_txt" value="" readonly>
+									</div>
+									<label class="col-md-1 control-label" for="form_control_1">Biaya</label>
+									<div class="col-md-2">
+										<input type="text" class="form-control" id="biaya_txt" value="" readonly>
 									</div>
 								</div>
 								<div class="form-group">
@@ -460,22 +490,6 @@ function klik_pelanggan(id){
 											?>
 											</tbody>
 										</table>
-									</div>
-								</div>
-								<div class="form-group">
-									<label class="col-md-2 control-label" for="form_control_1">Tujuan</label>
-									<div class="col-md-4">
-										<div class="input-group input-group-sm">
-											<div class="input-group-control">
-												<input type="hidden" name="id_tujuan" id="id_tujuan" value="">
-												<input type="text" class="form-control" id="tujuan_txt" value="" readonly>
-												<div class="form-control-focus">
-												</div>
-											</div>
-											<span class="input-group-btn btn-right">
-												<button type="button" class="btn green-haze" style="height: 34px;" id="cari_tujuan">Cari</button>
-											</span>
-										</div>
 									</div>
 								</div>
 								<div class="form-group">
@@ -613,6 +627,8 @@ function klik_pelanggan(id){
 						<tr class="info">
 							<th style="text-align:center;"> No</th>
 							<th style="text-align:center;"> Tujuan</th>
+							<th style="text-align:center;"> Kendaraan</th>
+							<th style="text-align:center;"> Biaya</th>
 						</tr>
 					</thead>
 					<tbody>

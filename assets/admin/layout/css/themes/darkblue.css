@@ -900,7 +900,11 @@ Page Footer
 Boby
 ****/
 body {
-  background:url('../../../../black-wood.jpg') no-repeat;
+    background:url('../../../../nightblur2.jpg') no-repeat;
+  /*background-image: url(http://leydenlewis.com/images/LANDING_PAGE.jpg);*/
+    background-repeat: no-repeat;
+    background-position: 0 0;
+    background-size: cover;
 }
 
 /****

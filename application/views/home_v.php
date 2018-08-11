@@ -157,6 +157,10 @@ function MonthToString($month){
 												<a href="<?php echo base_url(); ?>tujuan_c">
 												<i class="fa fa-caret-right"></i> Master Rute </a>
 											</li>
+											<li <?php if ($menu2 == 'kendaraan') { echo "class = 'active'";}?>>
+												<a href="<?php echo base_url(); ?>kendaraan_c">
+												<i class="fa fa-caret-right"></i> Master Kendaraan </a>
+											</li>
 										</ul>
 									</div>
 								</div>
@@ -349,6 +353,7 @@ function MonthToString($month){
 <script src="<?php echo base_url(); ?>assets/admin/pages/scripts/components-pickers.js"></script>
 <script src="<?php echo base_url(); ?>assets/admin/pages/scripts/components-dropdowns.js"></script>
 <script src="<?php echo base_url(); ?>assets/js-form.js"></script>
+<script src="<?php echo base_url(); ?>js/pesan.js"></script>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>assets/global/plugins/bootstrap-toastr/toastr.min.css"/>
 <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>css/style-devan.css"/>
 <!-- END PAGE LEVEL SCRIPTS -->
